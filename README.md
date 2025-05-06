@@ -26,7 +26,7 @@ sudo docker run --name xray-proxy --network host \
   -v /dev/net/tun:/dev/net/tun --device /dev/net/tun \
   --privileged -d xray-tun2socks-arm```
 
-###роверка работы
+###проверка работы
 Проверить работу туннеля можно командой:
 
 ```bash
