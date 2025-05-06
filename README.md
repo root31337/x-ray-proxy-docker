@@ -3,8 +3,11 @@
 Docker контейнер для настройки XRay с Vless Reality на Linux (включая Raspberry Pi) с использованием tun2socks.
 
 ## Быстрый старт
-
+   
 ### Подготовка
+Переменные окружения
+Все настройки задаются в файле .env. Используйте .env.template как образец для создания своего файла .env.
+
 1. Скопируйте файл `.env.template` в `.env`:
    ```bash
    cp .env.template .env
@@ -15,11 +18,8 @@ Docker контейнер для настройки XRay с Vless Reality на L
 ```bash
 docker build -t xray-tun2socks-arm .
 
-### Подготовка
-Переменные окружения
-Все настройки задаются в файле .env. Используйте .env.template как образец для создания своего файла .env.
 
-запуск контейнера
+### Запуск контейнера
 ```bash
 sudo docker run --name xray-proxy --network host \
   --cap-add=NET_ADMIN --cap-add=NET_RAW --cap-add=SYS_MODULE \
@@ -45,5 +45,3 @@ Docker установленный на системе
 
 
 
-
-   
