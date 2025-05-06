@@ -1,0 +1,19 @@
+version: '3'
+services:
+  xray:
+    image: xray-tun2socks
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    environment:
+      - SERVER_ADDRESS=your.server.com
+      - SERVER_PORT=443
+      - USER_ID=your-uuid-here
+      - FLOW=xtls-rprx-vision
+      - FINGERPRINT_FP=chrome
+      - SERVER_NAME_SNI=real.server.com
+      - PUBLIC_KEY_PBK=server-public-key
+      - SHORT_ID_SID=short-id
+      - CONTAINER_IP_ADDRESS=172.18.20.5
+    restart: unless-stopped
