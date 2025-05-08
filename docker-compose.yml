@@ -1,19 +1,34 @@
-version: '3'
+version: '3.8'
+
 services:
-  xray:
-    image: xray-tun2socks
+  xray-proxy:
+    build: .
+    container_name: xray-proxy
+    image: xray-tun2socks-arm
+    restart: unless-stopped
     network_mode: host
+    environment:
+      - SERVER_ADDRESS=${SERVER_ADDRESS}
+      - SERVER_PORT=${SERVER_PORT}
+      - USER_ID=${USER_ID}
+      - ENCRYPTION=${ENCRYPTION}
+      - FINGERPRINT_FP=${FINGERPRINT_FP}
+      - FLOW=${FLOW}
+      - SERVER_NAME_SNI=${SERVER_NAME_SNI}
+      - PUBLIC_KEY_PBK=${PUBLIC_KEY_PBK}
+      - SHORT_ID=${SHORT_ID}
+      - GATEWAY=${GATEWAY}
+      - ADAPTER_NAME=${ADAPTER_NAME}
     cap_add:
       - NET_ADMIN
       - NET_RAW
-    environment:
-      - SERVER_ADDRESS=your.server.com
-      - SERVER_PORT=443
-      - USER_ID=your-uuid-here
-      - FLOW=xtls-rprx-vision
-      - FINGERPRINT_FP=chrome
-      - SERVER_NAME_SNI=real.server.com
-      - PUBLIC_KEY_PBK=server-public-key
-      - SHORT_ID_SID=short-id
-      - CONTAINER_IP_ADDRESS=172.18.20.5
-    restart: unless-stopped
+      - SYS_MODULE
+    volumes:
+      - "/dev/net/tun:/dev/net/tun"
+    privileged: true
+    command: /bin/sh -c "/app/start.sh && tail -f /dev/null"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
