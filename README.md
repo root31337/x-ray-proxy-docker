@@ -1,6 +1,6 @@
 # XRay Proxy Docker for Linux (Raspberry Pi)
 
-Docker контейнер для настройки XRay с Vless Reality на Linux (включая Raspberry Pi) с использованием tun2socks.
+Docker контейнер для настройки клиента XRay с Vless Reality на Linux (включая Raspberry Pi) с использованием tun2socks для туннелирования трафика.
 
 ## Быстрый старт
    
